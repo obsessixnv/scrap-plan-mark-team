@@ -56,7 +56,7 @@ class OpenAIModelFee(BaseModel):
     output_fee: str = Field(..., description="Fee for output token for the OpenAI model.")
 
 
-@app.route('/extract_team_info', methods=['POST'])
+@app.route('/', methods=['POST'])
 def extract_team_info():
     data = request.json
     domain = data.get('domain')
