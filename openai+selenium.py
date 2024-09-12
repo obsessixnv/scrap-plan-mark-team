@@ -10,6 +10,9 @@ import json
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return 'Hello, Render! Your Flask app is running.'
 
 def find_team_page(base_url):
     # Keywords to search for in the URLs
