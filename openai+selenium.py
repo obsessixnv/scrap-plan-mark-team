@@ -96,10 +96,5 @@ def extract_team_info():
 
     team_info = json.loads(result.extracted_content)
 
-    output = {
-        "team": team_info,
-        "team_domain": url
 
-    }
-
-    return jsonify(output)
+    return jsonify({'team_domain': url, 'team': team_info})
