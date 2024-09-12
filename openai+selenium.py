@@ -7,12 +7,9 @@ from crawl4ai.web_crawler import WebCrawler
 from crawl4ai.extraction_strategy import LLMExtractionStrategy
 from pydantic import BaseModel, Field
 import json
-from flask_cors import CORS
-
-
 
 app = Flask(__name__)
-CORS(app)
+
 
 def find_team_page(base_url):
     # Keywords to search for in the URLs
