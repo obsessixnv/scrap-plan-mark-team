@@ -20,7 +20,11 @@ def find_team_page(base_url):
 
     # Set up the web driver (Chrome in this example)
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run in headless mode to avoid opening a browser window
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
+    options.add_argument("--no-sandbox")  # Disable the sandbox for Chrome
+    options.add_argument("--disable-dev-shm-usage")  # Address shared memory issue
+    options.add_argument("--remote-debugging-port=0") # Run in headless mode to avoid opening a browser window
     driver = webdriver.Chrome(options=options)  # Ensure chromedriver is in PATH or specify its path
 
     try:
