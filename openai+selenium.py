@@ -10,6 +10,9 @@ import json
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return 'Hello, Render! Your Flask app is running.'
 
 def find_team_page(base_url):
     # Keywords to search for in the URLs
@@ -56,7 +59,7 @@ class OpenAIModelFee(BaseModel):
     output_fee: str = Field(..., description="Fee for output token for the OpenAI model.")
 
 
-@app.route('/extract_team_info', methods=['POST'])
+@app.route('/process', methods=['POST'])
 def extract_team_info():
     data = request.get_json()
     domain = data['domain']
@@ -101,6 +104,5 @@ def extract_team_info():
 
     return jsonify({'team_domain': url, 'team': team_info})
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(host='0.0.0.0', port=8080)
