@@ -7,6 +7,7 @@ from crawl4ai.web_crawler import WebCrawler
 from crawl4ai.extraction_strategy import LLMExtractionStrategy
 from pydantic import BaseModel, Field
 import json
+from selenium.webdriver.chrome.service import Service
 
 app = Flask(__name__)
 
@@ -31,7 +32,9 @@ def find_team_page(base_url):
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1280x1024")
     options.add_argument("--remote-debugging-port=9222")
-    driver = webdriver.Chrome(options=options)
+    chrome_service = Service("/usr/local/bin/chromedriver")
+
+    driver = webdriver.Chrome(service=chrome_service, options=options)
     driver.set_page_load_timeout(30)# Ensure chromedriver is in PATH or specify its path
 
     try:
