@@ -24,8 +24,12 @@ def find_team_page(base_url):
     options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
     options.add_argument("--no-sandbox")  # Disable the sandbox for Chrome
     options.add_argument("--disable-dev-shm-usage")  # Address shared memory issue
-    options.add_argument("--remote-debugging-port=0") # Run in headless mode to avoid opening a browser window
-    driver = webdriver.Chrome(options=options)  # Ensure chromedriver is in PATH or specify its path
+    options.add_argument("--remote-debugging-port=0")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-software-rasterizer")
+    options.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Chrome(options=options)
+    driver.set_page_load_timeout(30)# Ensure chromedriver is in PATH or specify its path
 
     try:
         # Navigate to the base URL
