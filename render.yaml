@@ -14,6 +14,3 @@ services:
       unzip chromedriver_linux64.zip -d /usr/local/bin/ && \
       rm chromedriver_linux64.zip
     startCommand: gunicorn app:app --bind 0.0.0.0:8080
-    envVars:
-      - key: OPENAI_API_KEY
-        value: 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
