@@ -13,4 +13,4 @@ services:
       wget -N https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip && \
       unzip chromedriver_linux64.zip -d /usr/local/bin/ && \
       rm chromedriver_linux64.zip
-    startCommand: gunicorn app:app --bind 0.0.0.0:8080
+    startcommand: gunicorn app:app --bind 0.0.0.0:8080 --timeout 120 --workers 3
