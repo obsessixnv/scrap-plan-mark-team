@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: flask-selenium-app
+    env: python
+    region: oregon   # Specify region, e.g., oregon, frankfurt
+    plan: starter       # Can be "starter" or "standard" for paid tiers
+    buildCommand: |
+      pip install -r requirements.txt
+      # Install Chrome dependencies
+      apt-get update && apt-get install -y wget unzip google-chrome-stable
+      # Install ChromeDriver
+      CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
+      wget -N https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip && \
+      unzip chromedriver_linux64.zip -d /usr/local/bin/ && \
+      rm chromedriver_linux64.zip
+    startCommand: gunicorn app:app --bind 0.0.0.0:8080
+    envVars:
+      - key: OPENAI_API_KEY
+        value: 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
