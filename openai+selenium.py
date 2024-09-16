@@ -28,6 +28,9 @@ def find_team_page(base_url):
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-software-rasterizer")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1280x1024")
+    options.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(30)# Ensure chromedriver is in PATH or specify its path
 
