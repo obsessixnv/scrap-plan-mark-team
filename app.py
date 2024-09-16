@@ -19,23 +19,15 @@ def find_team_page(base_url):
     # Keywords to search for in the URLs
     keywords = ['team', 'people', 'about', 'staff', 'leadership', 'our-team', 'who-we-are']
 
-    # Set up the web driver (Chrome in this example)
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
-    options.add_argument("--no-sandbox")  # Disable the sandbox for Chrome
-    options.add_argument("--disable-dev-shm-usage")  # Address shared memory issue
-    options.add_argument("--remote-debugging-port=0")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-software-rasterizer")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1280x1024")
-    options.add_argument("--remote-debugging-port=9222")
-    chrome_service = Service("/usr/local/bin/chromedriver")
+    # Set up the web driver options (headless Chrome)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
 
-    driver = webdriver.Chrome(service=chrome_service, options=options)
-    driver.set_page_load_timeout(30)# Ensure chromedriver is in PATH or specify its path
+    # Initialize the web driver
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
     try:
         # Navigate to the base URL
@@ -55,12 +47,9 @@ def find_team_page(base_url):
 
                 # Check if the href or link text contains any of the keywords
                 if any(keyword in href_lower for keyword in keywords) or any(keyword in text for keyword in keywords):
-                    # Join relative URLs with the base URL
                     full_url = urljoin(base_url, href)
-                    print(f"Found possible team page: {full_url}")
                     return full_url
 
-        print("No team/people page found.")
         return base_url
 
     finally:
